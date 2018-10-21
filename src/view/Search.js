@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {search} from '../BooksAPI'
 import Book from '../component/Book.js';
-import {getAll} from '../BooksAPI'
 
-export default class Home extends Component {
+
+export default class Search extends Component {
 
   constructor(props){
     super(props);
@@ -14,16 +14,6 @@ export default class Home extends Component {
     };
 
   }
-
-  async componentDidMount(){
-    try {
-      const books= await getAll();
-         this.props.addBooks(books);
-    } catch(error){
-      console.log(error);
-    }
-  }
-
   handleChange=async e=>{
     try {
         const query=e.target.value;
@@ -43,8 +33,6 @@ export default class Home extends Component {
       console.log(error);
     }
     }
-
-
   render(){
     return (
       <div className="search-books">
@@ -60,12 +48,10 @@ export default class Home extends Component {
               you don't find a specific author or title. Every search is limited by search terms.
             */}
             <input type="text" placeholder="Search by title or author" onChange={this.handleChange}/>
-
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-
           {this.state.books.length>0 && this.state.books.map(book=>
             {
               const inShelf=this.props.books.find(searchBook =>
@@ -83,6 +69,5 @@ export default class Home extends Component {
         </div>
       </div>
     )
-
   }
 }

@@ -25,7 +25,6 @@ export default class Search extends Component {
         } else {
           this.setState({ books: results});
         }
-        console.log(results);
     } else {
       this.setState({books:[]});
     }
@@ -64,7 +63,7 @@ export default class Search extends Component {
               return <Book key={book.id} {...book} moveBook={this.props.moveBook}/>
             }
           )}
-          {this.state.books.length===0 && <h1 style={{textAlign:"center"}}> No results found </h1>}
+          {(this.state.books.length===0 && this.state.query!=="") && <h1 style={{textAlign:"center", color:"#FF0000"}}> No results found </h1>}
           </ol>
         </div>
       </div>
